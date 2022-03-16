@@ -11,7 +11,7 @@ Turtlebot Autonomous Navigation:
     <a • href="https://www.linkedin.com/in/shir-erdreich/">Shir erdreich</a>
   </p>
   
-Make your [Turtlebot2](https://www.turtlebot.com/turtlebot2/) run on ROS Melodic with [Nvidia Jetson nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit)  (Ubuntu 18.04) and [rplidar A1](https://www.slamtec.com/en/Lidar/A1).
+Make your [Turtlebot2](https://www.turtlebot.com/turtlebot2/) run on ROS Melodic with [Nvidia Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit)  (Ubuntu 18.04) and [rplidar A1](https://www.slamtec.com/en/Lidar/A1).
 
 
 <p align="center">
