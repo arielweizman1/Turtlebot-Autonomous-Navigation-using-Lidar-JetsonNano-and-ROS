@@ -234,13 +234,13 @@ You can check that your vnc is working by running:
 ```
 ps -ef|grep vnc
 ```
-Next, download any vnc server to your remote computer. i recommand vnc viewer.
+Next, download any vnc server to your remote computer. I recommand vnc viewer.
 
 to check what is your ip simply run on terminal `ifconfig`
 and than type the ip in your vnc server.
 
 ## Step 6 - Install turtlebot navigation package
-In order to make an Autonomous Navigation, install the [ROS Navigation Stack](http://wiki.ros.org/navigation)
+In order to make an Autonomous Navigation, install the [ROS Navigation Stack](http://wiki.ros.org/navigation) who is responsible for any kind of navigation.
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/ros-planning/navigation.git
@@ -256,7 +256,9 @@ catkin_make
 ```
 ## Step 7 - How to save and load a map
 ### Save the map
-The way to save a map is to use a package called map_server. This package will save map data to a yaml and pgm formatted file.
+Our plan is to navigate over a saved map of the environment.
+For that purpose, we need a way to save and use a map.
+The way to save a map is using a package called map_server. This package will save map data to a yaml and pgm formatted file.
 You need to install map_server.
 ```
 sudo apt-get install ros-melodic-map-server
@@ -268,7 +270,9 @@ Launch the mapping process
     roslaunch hector_slam_launch tutorial.launch
 ```
 
-After some strolling  around, when you are happy with the map that you see in rviz, you can save the map as map1.yaml and map1.pgm. Open a new terminal.
+After some strolling  around, when you are happy with the map that you see in rviz, you can save the map as map1.yaml and map1.pgm.
+
+Now, open a new terminal.
 ```
 cd ~/catkin_ws/src/turtlebot_apps/turtlebot_navigation/maps
 ```
@@ -296,8 +300,9 @@ I have made some changes in the files to make it work together with the lidar:
 1. Add the 'rplidar_costmap_params.yaml' from this repository to turtlebot_navigation/param directory.
 2. Next, change the 'Laser_amcl_demo.launch' file to the one from my repository.
 
-pay attention that in the 'Laser_amcl_demo.launch' we are loading the map so you dont need to do it seperatly.
-Remember to change the name according to your saved map_name whenever you pick different location)
+Pay attention that in the 'Laser_amcl_demo.launch' we are loading the map so you dont need to do it seperatly.
+Remember to change the name according to your saved map_name whenever you pick different location.
+
 To view the navigation in rviz, we need the 'view_navigation.launch' thus, install [turtlebot_apps](https://github.com/turtlebot/turtlebot_apps):
 ```
 cd ~/catkin_ws/src
@@ -323,7 +328,7 @@ roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
 ```
 The rviz is open now. 
 
-press the 2D pose estimate, and press on the real location of the robot.make sure that you also set the orientation correct.
+Press the 2D pose estimate, and press on the real location of the robot. make sure that you also set the orientation correct.
 
 ![image](https://user-images.githubusercontent.com/57818213/158700683-d59d11c8-3ef6-4bd1-b385-ce21cfb4479a.png)
 
@@ -331,7 +336,7 @@ The next step is to mark the navigation goal, by pressing the 2D nav goal
 
 ![image](https://user-images.githubusercontent.com/57818213/158701164-c2b77804-fcb6-41a2-ab7c-75c6ece57128.png)
 
-But before you press the 2d nav goal, please make sure that keyboard_teleop.launch is closed. if not, just ctrl+c to terminate this terminal (otherwisethe the robot will not respond and it won't work)
+But before you press the 2d nav goal, please make sure that keyboard_teleop.launch is closed. if not, just ctrl+c to terminate this terminal (otherwise the robot will not respond and it won't work)
 
 Now, you can finally choose your destination on the map!!
 
