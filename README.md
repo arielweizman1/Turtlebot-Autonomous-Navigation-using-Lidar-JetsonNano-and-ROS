@@ -13,42 +13,54 @@ Turtlebot Autonomous Navigation:
   
 Make your [Turtlebot2](https://www.turtlebot.com/turtlebot2/) run on ROS Melodic with [Nvidia Jetson nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit)  (Ubuntu 18.04) and [rplidar A1](https://www.slamtec.com/en/Lidar/A1).
 
-![](https://www.turtlebot.com/assets/images/turtlebot_2_lg.png)
 
-- [Turtlebot Autonomous Navigation:](#turtlebot-autonomous-navigation:)
+<p align="center">
+  <img src="https://media.istockphoto.com/vectors/smart-home-kitchen-assistant-flat-illustration-vector-id1145748143?k=20&m=1145748143&s=612x612&w=0&h=59GPU9vcmle89N4sFXrFkKbPC0CAoWeluh5rmm7vdSY=" width="500" >
+</p>
+
+# [Turtlebot Autonomous Navigation Guide:](#turtlebot-autonomous-navigation:)
   * [Step 0 - Setup Nvidia Jetson Nano on SD card](#step-0---setup-nvidia-jetson-nano-on-sd-card)
   * [Step 1 - Install ROS Melodic](#step-1---install-ros-melodic)
   * [Step 2 - Install the Turtlebot Package](step-2---install-the-turtlebot-package)
   * [Step 3 - Install rplidar Package](#step-3---install-rplidar-package)
   * [Step 4 - SLAM Algorithm - Install hector slam Package](#step-4---slam-algorithm---install-hector-slam-package)
-  * [Step 5 - Control the jetson remotly](#Step-5---control-the-jetson-remotly)
-  * Step 6 - Install turtlebot navigation package
-  * Step 7 - How to save and load a map
-  * Step 8 - Step 8 - Autonomous Navigation
+  * [Step 5 - Control the Jetson remotly](#step-5---control-the-jetson-remotly)
+  * [Step 6 - Install turtlebot navigation package](#step-6---install-turtlebot-navigation-package)
+  * [Step 7 - How to save and load a map](#step-7---how-to-save-and-load-a-map)
+  * [Step 8 - Autonomous Navigation](#step-8---autonomous-navigation)
   * [References](#references)
 
 ## Step 0 - Setup Nvidia Jetson Nano on SD card
+<p align="center">
+  <img src="https://developer.nvidia.com/sites/default/files/akamai/embedded/images/jetsonNano/JetsonNano-DevKit_Front-Top_Right_trimmed.jpg" width="200" >
+</p>
 
 You can learn about the parts of your jetson nano kit [here](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#intro).
 
-After you know your kit, you'll want to follow the [setup instructions](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#write) for setting up the Ubuntu SD card image. At time of writing image is Ubuntu 18.04.
+After you know your kit, follow the [setup instructions](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#write) for setting up the Ubuntu SD card image. (At time of writing this, image is Ubuntu 18.04).
 
 ## Step 1 - Install ROS Melodic
+<p align="center">
+  <img src="http://wiki.ros.org/melodic?action=AttachFile&do=get&target=melodic.jpg" width="230" >
+</p>
 
 You'll want to install ROS Melodic so follow the [instructions here](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 ### Step 1.1 - Learn about ROS
-If you don't have a lot of experience with ROS check out the [start guide](http://wiki.ros.org/ROS/StartGuide) and follow the links there for an [intro](http://wiki.ros.org/ROS/Introduction).
+If you are new with ROS you can start with the [start guide](http://wiki.ros.org/ROS/StartGuide) and follow the links there for an [intro](http://wiki.ros.org/ROS/Introduction).
 
-The [tutorials](http://wiki.ros.org/ROS/Tutorials) are very good, so check them out.
+You can also do the [tutorials](http://wiki.ros.org/ROS/Tutorials). they are very good, so check them out!
 I also highly recommend to follow the tutorials with [this](https://www.youtube.com/watch?v=HMXYXcCMd-Y&list=PL1R5gSylLha3i1nbDdmpkJ6wBVudIJheI&index=2) videos series. 
 
-## Step 2 - Install the Turtlebot Package
+## Step 2 - Install the Turtlebot 2 Package
+
+<p align="center">
+  <img src="https://www.turtlebot.com/assets/images/turtlebot_2_lg.png" width="250" >
+</p>
 
 The following assumes that you've created a catkin workspace in the default directory as in the [tutorial](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment).
 We'll have to first clone the package from github into the catkin workspace. 
-from: https://github.com/gaunthan/Turtlebot2-On-Melodic
-Now run the following command (inside the root of catkin workspace) to build up running environment for Turtlebot2:
+according to https://github.com/gaunthan/Turtlebot2-On-Melodic , run the following command (inside the root of catkin workspace) to build up running environment for Turtlebot2:
 ``` 
 curl -sLf https://raw.githubusercontent.com/gaunthan/Turtlebot2-On-Melodic/master/install_basic.sh | bash
 catkin_make
@@ -69,9 +81,37 @@ If you want to use keyboard to control it, just run the following command
 source ./devel/setup.bash
 roslaunch turtlebot_teleop keyboard_teleop.launch
 ``` 
-## Step 3 - Install rplidar Package
+And it will output something like this
 
-On the turtlebot at our lab, we have an rplidar (version A1). So we need to install the rplidar package by cloning the git file:
+```
+ROS_MASTER_URI=http://localhost:11311
+
+process[turtlebot_teleop_keyboard-1]: started with pid [23757]
+
+Control Your Turtlebot!
+---------------------------
+Moving around:
+   u    i    o
+   j    k    l
+   m    ,    .
+
+q/z : increase/decrease max speeds by 10%
+w/x : increase/decrease only linear speed by 10%
+e/c : increase/decrease only angular speed by 10%
+space key, k : force stop
+anything else : stop smoothly
+
+CTRL-C to quit
+
+currently:	speed 0.2	turn 1 
+```
+## Step 3 - Install rplidar Package
+On the turtlebot at our lab, we have an rplidar (version A1). 
+<p align="center">
+  <img src="https://www.slamtec.com/images/a1/summary-section3.jpg" width="700" >
+</p>
+
+We need to install the rplidar package by cloning the git file:
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/Slamtec/rplidar_ros.git
@@ -95,13 +135,9 @@ We run the following command:
 ls -l /dev |grep ttyUSB
 ```
 The output should be something like:
-```console
-jetson0@jetson-nano:~/catkin_ws$ ls -l /dev |grep ttyUSB
-lrwxrwxrwx  1 root    root           7 Nov  5 11:45 gps0 -> ttyUSB0
-lrwxrwxrwx  1 root    root           7 Nov  5 11:45 kobuki -> ttyUSB1
-crw-rw-rw-  1 root    dialout 188,   0 Nov  5 13:13 ttyUSB0
-crw-rw-rw-  1 root    dialout 188,   1 Nov  5 11:45 ttyUSB1
-```
+
+![image](https://user-images.githubusercontent.com/57818213/158692871-734bf8eb-949c-4a8b-887c-faf5b424d1cd.png)
+
 our lidar has the name of `gps0` so we need to change the `ttyUSB0` permissions:
 ```
 sudo chmod 777 /dev/ttyUSB0
@@ -126,8 +162,10 @@ roslaunch rplidar_ros view_rplidar.launch
 For more info check out the [ros wiki page](http://wiki.ros.org/rplidar)
 
 ## Step 4 - SLAM Algorithm - Install hector slam Package
-You can use [hector mapping](http://wiki.ros.org/hector_mapping).
-To install do the regular drill: 
+To map your surrounding, Use hector slam algorithm:
+You can read about it [here](http://wiki.ros.org/hector_slam). note that the important node is [hector mapping](http://wiki.ros.org/hector_mapping).
+
+To install : 
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
@@ -169,19 +207,19 @@ to:
 
 1. Open a new terminal and launch turtlebot :
 
-    roslaunch turtlebot_bringup minimal.launch
+    `roslaunch turtlebot_bringup minimal.launch`
     
 2. Open a new terminal and launch the rplidar:
 
-    roslaunch rplidar_ros rplidar.launch
+    `roslaunch rplidar_ros rplidar.launch`
     
 3. Open a new terminal and launch hector-slam:
 
-    roslaunch hector_slam_launch tutorial.launch
+    `roslaunch hector_slam_launch tutorial.launch`
     
 4. Open a new terminal and launch the keyboard_teleop:
 
-    roslaunch turtlebot_teleop keyboard_teleop.launch
+    `roslaunch turtlebot_teleop keyboard_teleop.launch`
 
 Now (by clicking on the teleop terminal) you can control the robot with your keyboard and map your room!
 
@@ -217,7 +255,7 @@ cd ~/catkin_ws
 catkin_make
 ```
 ## Step 7 - How to save and load a map
-### save the map
+### Save the map
 The way to save a map is to use a package called map_server. This package will save map data to a yaml and pgm formatted file.
 You need to install map_server.
 ```
@@ -251,9 +289,63 @@ rviz
 ```
 
 ## Step 8 - Autonomous Navigation
-First, please make sure that keyboard_teleop.launch is closed. if not, just ctrl+c to terminate this terminal.
-to navigate we use amcl package
-Now, add the rplidar_costmap_params.yaml from my files to turtlebot_navigation/param directory.
-Next, change the Laser_amcl_demo.launch file to the one in my files.
+
+To navigate, we use [amcl package](http://wiki.ros.org/amcl).
+you already installed it within the navigation stack.
+I have made some changes in the files to make it work together with the lidar:
+1. Add the 'rplidar_costmap_params.yaml' from this repository to turtlebot_navigation/param directory.
+2. Next, change the 'Laser_amcl_demo.launch' file to the one from my repository.
+
+pay attention that in the 'Laser_amcl_demo.launch' we are loading the map so you dont need to do it seperatly.
+Remember to change the name according to your saved map_name whenever you pick different location)
+To view the navigation in rviz, we need the 'view_navigation.launch' thus, install [turtlebot_apps](https://github.com/turtlebot/turtlebot_apps):
+```
+cd ~/catkin_ws/src
+git clone https://github.com/turtlebot/turtlebot_apps.git
+```
+build:
+```
+cd ~/catkin_ws
+catkin_make
+```
+
+### Run Everything together for navigation!
+
+1. Close all the terminals.
+2. Run every line in a new terminal:
+
+```
+roscore &
+roslaunch turtlebot_bringup minimal.launch
+roslaunch rplidar_ros rplidar.launch
+roslaunch turtlebot_navigation laser_amcl_demo.launch
+roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
+```
+The rviz is open now. 
+
+press the 2D pose estimate, and press on the real location of the robot.make sure that you also set the orientation correct.
+
+![image](https://user-images.githubusercontent.com/57818213/158700683-d59d11c8-3ef6-4bd1-b385-ce21cfb4479a.png)
+
+The next step is to mark the navigation goal, by pressing the 2D nav goal
+
+![image](https://user-images.githubusercontent.com/57818213/158701164-c2b77804-fcb6-41a2-ab7c-75c6ece57128.png)
+
+But before you press the 2d nav goal, please make sure that keyboard_teleop.launch is closed. if not, just ctrl+c to terminate this terminal (otherwisethe the robot will not respond and it won't work)
+
+Now, you can finally choose your destination on the map!!
+
+thats it :)
+
+
+
+## References
+[1] Guidence and running lidar and hector slam: https://github.com/elishafer/Kobuki
+
+[2] Turtlebot2 github source: https://github.com/gaunthan/Turtlebot2-On-Melodic
+
+[3] 
+
+[4]
 
 
