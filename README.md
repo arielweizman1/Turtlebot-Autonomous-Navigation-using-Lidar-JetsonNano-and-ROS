@@ -111,7 +111,7 @@ On the turtlebot at our lab, we have an rplidar (version A1).
   <img src="https://www.slamtec.com/images/a1/summary-section3.jpg" width="700" >
 </p>
 
-We need to install the rplidar package by cloning the git file:
+We need to install the [rplidar package](http://wiki.ros.org/rplidar) by cloning the git file:
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/Slamtec/rplidar_ros.git
@@ -159,11 +159,10 @@ Now we can execute a launch file:
 roslaunch rplidar_ros view_rplidar.launch
 ```
 
-For more info check out the [ros wiki page](http://wiki.ros.org/rplidar)
-
 ## Step 4 - SLAM Algorithm - Install hector slam Package
-To map your surrounding, Use hector slam algorithm:
-You can read about it [here](http://wiki.ros.org/hector_slam). note that the important node is [hector mapping](http://wiki.ros.org/hector_mapping).
+To map your surrounding, we use hector-slam. ( SLAM - Simultaneous Localization and Mapping)
+You can read about it [here](http://wiki.ros.org/hector_slam).
+note that the important node is [hector mapping](http://wiki.ros.org/hector_mapping).
 
 To install : 
 ```
@@ -349,8 +348,8 @@ thats it :)
 
 [2] Turtlebot2 github source: https://github.com/gaunthan/Turtlebot2-On-Melodic
 
-[3] 
+[3] ROS studying great videos:https://www.youtube.com/watch?v=HMXYXcCMd-Y&list=PL1R5gSylLha3i1nbDdmpkJ6wBVudIJheI&index=2
 
-[4]
+[4] Navigation very good videos: https://www.youtube.com/watch?v=mYwIu4OVMR8
 
 
