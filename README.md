@@ -146,12 +146,12 @@ sudo chmod 777 /dev/ttyUSB0
 You'll also want to change the rplidar launch to take the tf in consideration. In `/home/Arielshir22/catkin_ws/src/rplidar_ros/launch/rplidar.launch` add the following line before `</launch>`:
 ```
   <node pkg="tf" type="static_transform_publisher" name="base_frame_2_laser"
-   args="0 0 0.05 0 0 0 0 /base_link /laser 50" />
+   args="0 0 0.05 0 0 0 /base_link /laser 50" />
 ```
 I had a lidar orientation Incompatibility to the robot odometry (turned 180 degrees) thus i used the next tf In `/home/Arielshir22/catkin_ws/src/rplidar_ros/launch/rplidar.launch` before `</launch>`:
 ```
   <node pkg="tf" type="static_transform_publisher" name="base_frame_2_laser"
-   args="0 0 0.05 3.14 0 0 0 /base_link /laser 50" />
+   args="0 0 0.05 3.14159 0 0 /base_link /laser 50" />
 ```
 
 Now we can execute a launch file:
